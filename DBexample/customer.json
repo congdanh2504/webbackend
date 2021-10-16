@@ -1,0 +1,23 @@
+{
+    "id": "1",
+    "fullName": "Truong Cong Danh",
+    "avatarAddress": "storage/images/users/example.png",
+    "phoneNumber": "01254995645",
+    "address": {
+        "province": "Da Nang",
+        "detail": "Nam Ky Khoi Nghia, FPT City, Ngu Hanh Son, Da Nang"
+    },
+    "email": "danhuchiha2002@gmail.com",
+    "birthday" : "25/04/2002",
+    "gender": true,
+    "password": "$2y$10$4t15L5.ACbMUIOjNhyMw.OzHkdsXhA3EZ/wkFUNrGc9EBrK5Aiw9C",
+    "type": "employee",
+    "cv": {
+        "skills": [ "mobile developer", "fullstack web developer" ],
+        "education": [ "software engineering of VKU", "PhD computer science of Harvard"],
+        "aboutMe": "Hello, I'm Danh..."
+    },
+    "zaloUrl": "https://zalo.me/01254995675",
+    "facebookUrl": "https://www.facebook.com/congdanh254"
+}
+
