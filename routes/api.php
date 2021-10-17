@@ -31,6 +31,7 @@ Route::post('/registerWithGG/{type}',[AuthController::class, 'registerWithGG']);
 Route::get('/postItem', [PostController::class, 'getAllPosts']);
 Route::get('/postItem/{id}', [PostController::class, 'getPost']);
 Route::put('/postUpdate/{id}', [postController::class, 'update']);
+Route::delete('/postDelete/{id}', [PostController::class, 'delete']); 
 
 Route::get('/blog', [BlogController::class, 'getAllBlogs']);
 

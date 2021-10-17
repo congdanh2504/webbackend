@@ -72,4 +72,9 @@ class PostItem extends Model
         $post->update($request->all());
         return $post;
     }
+
+    public static function deleteJob($id){
+        PostItem::find($id)->delete();
+        return PostItem::all();
+    }
 }

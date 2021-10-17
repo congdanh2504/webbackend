@@ -23,4 +23,8 @@ class PostController extends Controller
     protected function update(Request $request, $id){
         return PostItem::updateJob($request, $id);
     }
+
+    protected function delete($id){
+        return PostItem::deleteJob($id);
+    }
 }
