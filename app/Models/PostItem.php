@@ -14,6 +14,7 @@ class PostItem extends Model
     protected $collection = 'postItems';
     protected $fillable = [
         "companyId",
+        "title",
         "nameJob",
         "description",
         "category",
@@ -45,10 +46,9 @@ class PostItem extends Model
         $province = $document->province;
         $detailedAddress = $document->detailedAddress;
 
-
         Postitem::create([
             'companyId' => $companyId,
-            'imageAddress' => $path,
+            'imagesAddress' => $path,
             'title' => $title,
             'nameJob' => $nameJob,
             'description' => $description,
