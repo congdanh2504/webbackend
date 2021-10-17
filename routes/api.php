@@ -40,6 +40,8 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get('/user',[AuthController::class, 'user']);
 
     Route::post('/addBlog', [BlogController::class, 'addBlog']);
+
+    Route::post('/postJob', [PostController::class, 'postJob']);
 });
 
 
