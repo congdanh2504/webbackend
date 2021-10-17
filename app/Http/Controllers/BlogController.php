@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\DB;
 class BlogController extends Controller
 {
     protected function getAllBlogs() {
-        // $fileinfo = collect($googleDriveStorage->listContents('/', false))
-        // ->where('type', 'file')
-        // ->where('name', 'top-5-blogs-job-seekers-99175332.jpg')
-        // ->first();
-        // $contents = $fileinfo['path'];
-        
-        $projections = ['id', 'imageAddress', 'title', 'created_at', 'views'];
-        return Db::collection('blogs')->paginate(3, $projections);
+        $projections = ['id', 'imageAddress', 'title', 'created_at', 'views', 'userId'];
+        $data = Blog::all($projections);
+        $datat = array();
+        foreach($data as $blog) {
+            $blog->user;
+            array_push($datat, $blog);
+        }
+        $data = PaginationController::paginate($datat, 3);
+        return $data;
     }
 
     protected function addBlog(Request $request) {
