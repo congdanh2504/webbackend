@@ -29,6 +29,8 @@ Route::post('/loginWithGG',[AuthController::class, 'loginWithGG']);
 Route::post('/registerWithGG/{type}',[AuthController::class, 'registerWithGG']);
 
 Route::get('/postItem', [PostController::class, 'getAllPosts']);
+Route::get('/postItem/{id}', [PostController::class, 'getPost']);
+Route::put('/postUpdate/{id}', [postController::class, 'update']);
 
 Route::get('/blog', [BlogController::class, 'getAllBlogs']);
 
@@ -42,7 +44,6 @@ Route::middleware('auth.jwt')->group(function () {
     Route::post('/addBlog', [BlogController::class, 'addBlog']);
 
     Route::post('/postJob', [PostController::class, 'postJob']);
-
     Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
 });
 

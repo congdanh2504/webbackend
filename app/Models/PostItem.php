@@ -62,4 +62,14 @@ class PostItem extends Model
             'applies' => 0
         ]);
     }
+
+    public static function getPost($id) {
+        return PostItem::find($id);
+    }
+
+    public static function updateJob(Request $request, $id){
+        $post= PostItem::find($id);
+        $post->update($request->all());
+        return $post;
+    }
 }
