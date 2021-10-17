@@ -31,6 +31,8 @@ class User extends Model implements AuthenticatableContract, JWTSubject
 
     protected $fillable = [
         "name",
+        "cv",
+        "mobile",
         "avatarAddress",
         "phoneNumber",
         "address",
@@ -38,7 +40,7 @@ class User extends Model implements AuthenticatableContract, JWTSubject
         "password",
         "type",
         "rate",
-        "birthday",
+        "dob",
         "gender",
         "cv",
         "zaloUrl",

@@ -46,7 +46,7 @@ class PostItem extends Model
         $province = $document->province;
         $detailedAddress = $document->detailedAddress;
 
-        Postitem::create([
+        PostItem::create([
             'companyId' => $companyId,
             'imagesAddress' => $path,
             'title' => $title,

@@ -42,6 +42,8 @@ Route::middleware('auth.jwt')->group(function () {
     Route::post('/addBlog', [BlogController::class, 'addBlog']);
 
     Route::post('/postJob', [PostController::class, 'postJob']);
+
+    Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
 });
 
 

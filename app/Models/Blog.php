@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PaginationController;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -25,6 +26,18 @@ class Blog extends Model
 
     public function user() {
         return $this->belongsTo(User::class, 'userId');
+    }
+
+    public static function getAllBlogs() {
+        $projections = ['id', 'imageAddress', 'title', 'created_at', 'views', 'userId'];
+        $allBlogs = Blog::all($projections);
+        $allBlogsWithUser = array();
+        foreach($allBlogs as $blog) {
+            $blog->user;
+            array_push($allBlogsWithUser, $blog);
+        }
+        $data = PaginationController::paginate($allBlogsWithUser, 6);
+        return $data;
     }
 
     public static function addBlog(Request $request) {
