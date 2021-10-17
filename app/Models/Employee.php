@@ -13,14 +13,15 @@ class Employee extends User
 
     public static function updateProfile(Request $request) {
         $user = Auth::user();
-        $document = json_decode($request->document);
-        error_log($document->name);
-        $image = $request->image;    
-        $path = ImageController::saveFile($image);
+        if ($request->hasFile('image')){
+            $image = $request->image; 
+            $path = ImageController::saveFile($image);
+            $user->avatarAddress = $path;
+        }  
+        $document = json_decode($request->document); 
         $user->name = $document->name;
         $user->dob = $document->dob;
-        $user->address = [ "province" => $document->city, "detail" => $document->address];
-        $user->avatarAddress = $path;
+        $user->address = [ "province" => $document->city, "detail" => $document->address];     
         $user->mobile = $document->mobile;
         $user->cv = $document->cv;
         $user->save();
