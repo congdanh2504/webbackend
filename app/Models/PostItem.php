@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PaginationController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -61,6 +62,20 @@ class PostItem extends Model
             ],
             'applies' => 0
         ]);
+    }
+
+    public static function getAllPosts(){
+        $projections=['id','companyId', 'title','nameJob','salary',
+         'description', 'category', 'duration', 'address','imagesAddress'];
+        $allPost= PostItem::all($projections);
+        $allPostsWithUser = array();
+        foreach($allPost as $post){
+            $post->user;
+            array_push($allPostsWithUser,$post);
+        }
+        
+        $data = PaginationController::paginate($allPostsWithUser, 4);
+        return $data;
     }
 
     public static function getPost($id) {
