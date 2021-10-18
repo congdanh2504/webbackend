@@ -22,6 +22,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/getUserById/{id}', [AuthController::class, 'userById']);
+
 // Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::post('/loginWithGG',[AuthController::class, 'loginWithGG']);
