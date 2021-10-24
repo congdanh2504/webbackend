@@ -24,6 +24,9 @@ class PostItem extends Model
         "address",
         "imagesAddress",
         "applies", 
+        'rate',
+        'like',
+        'comment'
     ];
 
     public function user() {
@@ -60,13 +63,17 @@ class PostItem extends Model
                 'province' => $province,
                 'detail' =>$detailedAddress,
             ],
-            'applies' => 0
+            'applies' => 0,
+            'rate'=>0,
+            'like' => 0,
+            'comment' => 0,
         ]);
     }
 
     public static function getAllPosts(){
         $projections=['id','companyId', 'title','nameJob','salary',
-         'description', 'category', 'duration', 'address','imagesAddress'];
+         'description', 'category', 'duration', 'address','imagesAddress',
+        'applies', 'rate', 'like', 'comment'];
         $allPost= PostItem::all($projections);
         $allPostsWithUser = array();
         foreach($allPost as $post){
@@ -79,7 +86,9 @@ class PostItem extends Model
     }
 
     public static function getPost($id) {
-        return PostItem::find($id);
+        $post= PostItem::find($id);
+        $post->user;
+        return $post;
     }
 
     public static function updateJob(Request $request, $id){

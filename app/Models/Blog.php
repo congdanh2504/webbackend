@@ -67,4 +67,14 @@ class Blog extends Model
         $blog->user;
         return $blog;
     }
+
+    public static function getNewBlogs(){
+        $newBlogs= Blog::latest()->take(5)->get();
+        $newBlogsUsers= array();
+        foreach($newBlogs as $blog){
+            $blog->user;
+            array_push($newBlogsUsers, $blog);
+        }
+        return $newBlogsUsers;
+    }
 }

@@ -12,6 +12,10 @@ class BlogController extends Controller
         return Blog::getAllBlogs();
     }
 
+    protected function getNewBlogs(){
+        return Blog::getNewBlogs();
+    }
+
     protected function addBlog(Request $request) {
         return Blog::addBlog($request);
     }
