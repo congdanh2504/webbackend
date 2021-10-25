@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Exception;
-use Google_Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
