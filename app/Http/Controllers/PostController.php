@@ -21,6 +21,10 @@ class PostController extends Controller
         return PostItem::getPost($id);
     }
 
+    protected function getMyPosts($id){
+        return PostItem::getMyPosts($id);
+    }
+
     protected function update(Request $request, $id){
         return PostItem::updateJob($request, $id);
     }

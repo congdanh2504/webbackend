@@ -43,7 +43,8 @@ class User extends Model implements AuthenticatableContract, JWTSubject
         "cv",
         "zaloUrl",
         "facebookUrl",
-        "reviews"
+        "reviews",
+        'description'
     ];
 
     public function getJWTIdentifier()

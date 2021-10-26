@@ -91,6 +91,16 @@ class PostItem extends Model
         return $post;
     }
 
+    public static function getMyPosts($id){
+        $myPost =PostItem::all()->where('companyId', $id);
+        $myPostUser =array();
+        foreach($myPost as $post){
+            $post->user;
+            array_push($myPostUser, $post);
+        }
+        return $myPostUser;
+    }
+
     public static function updateJob(Request $request, $id){
         $post= PostItem::find($id);
         $post->update($request->all());

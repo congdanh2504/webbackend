@@ -3,8 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +33,8 @@ Route::post('/registerWithGG/{type}',[AuthController::class, 'registerWithGG']);
 
 Route::get('/postItem', [PostController::class, 'getAllPosts']);
 Route::get('/postItem/{id}', [PostController::class, 'getPost']);
+Route::get('/my-posts/{id}', [PostController::class, 'getMyPosts']);
+
 // test post 
 Route::put('/postUpdate/{id}', [postController::class, 'update']);
 Route::delete('/postDelete/{id}', [PostController::class, 'delete']); 
@@ -52,5 +54,6 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::post('/postJob', [PostController::class, 'postJob']);
     Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
+    Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
 });
 
