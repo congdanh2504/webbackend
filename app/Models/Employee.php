@@ -26,4 +26,36 @@ class Employee extends User
         $user->cv = $document->cv;
         $user->save();
     }
+
+    public static function addReview(Request $request) {
+        $id = $request->input('id');
+        $employer = User::find($id);
+        $rate = $request->input('rate');
+        $title = $request->input('title');
+        $message = $request->input('message');
+        $user = Auth::user();
+
+
+        $oldRate = intval($employer->rate['count']);
+        $oldAvg = floatval($employer->rate['avg']);
+        $newAvg = (($oldAvg*$oldRate) + $rate) / ($oldRate + 1);
+        $newRate = $oldRate + 1;
+        
+        $employer->rate = [
+            "count" => $newRate,
+            "avg" => $newAvg
+        ];
+        $employer->save();
+
+        $employer->push('reviews', [
+            'user' => [
+                "userID" => $user['id'],
+                "name" => $user['name'],
+                "avatarAddress" => $user['avatarAddress']
+            ],
+            'rate' => $rate,
+            "title" => $title,
+            'message' => $message
+        ]);
+    }
 }

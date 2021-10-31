@@ -156,13 +156,27 @@ class User extends Model implements AuthenticatableContract, JWTSubject
     }
 
     public static function createNewUser($name, $email, $password, $type, $avatarAddress) {
-        User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => Hash::make($password),
-            'type' => $type,
-            'avatarAddress' => $avatarAddress
-        ]);  
+        if ($type == "Employee") {
+            User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make($password),
+                'type' => "Employee",
+                'avatarAddress' => $avatarAddress
+            ]); 
+        } else {
+            User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make($password),
+                'type' => "Employer",
+                'avatarAddress' => $avatarAddress,
+                'rate' => [
+                    "count" => 0,
+                    "avg" => 0
+                ]
+            ]);
+        } 
     }
 
 }

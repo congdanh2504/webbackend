@@ -36,7 +36,8 @@ Route::get('/postItem/{id}', [PostController::class, 'getPost']);
 Route::get('/my-posts/{id}', [PostController::class, 'getMyPosts']);
 
 // test post 
-Route::put('/postUpdate/{id}', [postController::class, 'update']);
+Route::put('/postUpdate/{id}', [PostController::class, 'update']);
+
 Route::delete('/postDelete/{id}', [PostController::class, 'delete']); 
 
 Route::get('/blog', [BlogController::class, 'getAllBlogs']);
@@ -47,7 +48,11 @@ Route::get('/new-blogs', [BlogController::class, 'getNewBlogs']);
 
 Route::get('/employer', [EmployeeController::class, 'getAllEmployers']);
 
+
+
 Route::middleware('auth.jwt')->group(function () {
+    Route::post('/review', [EmployeeController::class, 'addReview']);
+
     Route::get('/user',[AuthController::class, 'user']);
 
     Route::post('/addBlog', [BlogController::class, 'addBlog']);

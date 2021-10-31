@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
     protected function getAllPosts() {
-        // return DB::collection('postItems')->paginate(10);
         return PostItem::getAllPosts();
     }
 
