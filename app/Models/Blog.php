@@ -36,6 +36,7 @@ class Blog extends Model
             $blog->user;
             array_push($allBlogsWithUser, $blog);
         }
+        $allBlogsWithUser = array_reverse($allBlogsWithUser, true);
         $data = PaginationController::paginate($allBlogsWithUser, 6);
         return $data;
     }

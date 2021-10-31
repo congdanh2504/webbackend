@@ -80,7 +80,7 @@ class PostItem extends Model
             $post->user;
             array_push($allPostsWithUser,$post);
         }
-        
+        $allPostsWithUser = array_reverse($allPostsWithUser, true);
         $data = PaginationController::paginate($allPostsWithUser, 4);
         return $data;
     }
