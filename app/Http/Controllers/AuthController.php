@@ -12,6 +12,10 @@ class AuthController extends Controller
         return Auth::user();
     }
 
+    public function users(){
+        return User::all();
+    }
+
     public function userById($id) {
         return User::find($id);
     }

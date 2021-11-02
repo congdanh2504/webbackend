@@ -98,6 +98,9 @@ class PostItem extends Model
             $post->user;
             array_push($myPostUser, $post);
         }
+        $myPostUser = array_reverse($myPostUser, true);
+        $data= PaginationController::Paginate($myPostUser, 4);
+        return $data;
         return $myPostUser;
     }
 

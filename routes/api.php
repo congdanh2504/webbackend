@@ -27,18 +27,17 @@ Route::get('/getUserById/{id}', [AuthController::class, 'userById']);
 
 // Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::post('/loginWithGG',[AuthController::class, 'loginWithGG']);
+Route::post('/loginWithGG', [AuthController::class, 'loginWithGG']);
 
-Route::post('/registerWithGG/{type}',[AuthController::class, 'registerWithGG']);
+Route::post('/registerWithGG/{type}', [AuthController::class, 'registerWithGG']);
 
 Route::get('/postItem', [PostController::class, 'getAllPosts']);
 Route::get('/postItem/{id}', [PostController::class, 'getPost']);
-Route::get('/my-posts/{id}', [PostController::class, 'getMyPosts']);
 
 // test post 
 Route::put('/postUpdate/{id}', [PostController::class, 'update']);
 
-Route::delete('/postDelete/{id}', [PostController::class, 'delete']); 
+Route::delete('/postDelete/{id}', [PostController::class, 'delete']);
 
 Route::get('/blog', [BlogController::class, 'getAllBlogs']);
 
@@ -53,12 +52,21 @@ Route::get('/employer', [EmployeeController::class, 'getAllEmployers']);
 Route::middleware('auth.jwt')->group(function () {
     Route::post('/review', [EmployeeController::class, 'addReview']);
 
-    Route::get('/user',[AuthController::class, 'user']);
+    Route::get('/user', [AuthController::class, 'user']);
 
     Route::post('/addBlog', [BlogController::class, 'addBlog']);
 
     Route::post('/postJob', [PostController::class, 'postJob']);
-    Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
-    Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
-});
+    Route::get('/my-posts/{id}', [PostController::class, 'getMyPosts']);
 
+    Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
+
+    Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/employees', [EmployeeController::class, 'employees']);
+        Route::get('/employers', [EmployerController::class, 'employers']);
+    });
+
+
+});
