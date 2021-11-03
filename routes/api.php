@@ -45,7 +45,7 @@ Route::get('/blog', [BlogController::class, 'getAllBlogs']);
 
 Route::get('/blog/{id}', [BlogController::class, 'getById']);
 
-Route::get('/blog/new', [BlogController::class, 'getNewBlogs']);
+Route::get('/blog/new/{limit}', [BlogController::class, 'getNewBlogs']);
 
 Route::get('/employer', [EmployeeController::class, 'getAllEmployers']);
 

@@ -69,8 +69,8 @@ class Blog extends Model
         return $blog;
     }
 
-    public static function getNewBlogs(){
-        $newBlogs= Blog::latest()->take(5)->get();
+    public static function getNewBlogs($limit){
+        $newBlogs= Blog::latest()->take(intval($limit))->get();
         $newBlogsUsers= array();
         foreach($newBlogs as $blog){
             $blog->user;
