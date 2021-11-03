@@ -13,9 +13,5 @@ class EmployerController extends Controller
   public function employerUpdateProfile(Request $request){
     return Employer::updateProfile($request);
   }
-
-  public function employers(Request $request){
-    return User::where('type', '=','Employer')->Paginate(15);
-  }
     
 }

@@ -19,9 +19,4 @@ class EmployeeController extends Controller
     public function addReview(Request $request) {
         return Employee::addReview($request);
     }
-
-    public function employees(Request $request){
-        // return all employee 
-        return User::where('type', '=','Employee')->Paginate(15);
-    }
 }

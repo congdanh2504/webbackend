@@ -85,7 +85,7 @@ class PostItem extends Model
         return $data;
     }
 
-    public static function getPost($id) {
+    public static function getPostByID($id) {
         $post= PostItem::find($id);
         $post->user;
         return $post;
