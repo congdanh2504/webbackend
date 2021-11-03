@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EmployeeController;
@@ -23,50 +24,50 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/getUserById/{id}', [AuthController::class, 'userById']);
+Route::get('/user/{id}', [AuthController::class, 'userById']);
 
 // Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::post('/loginWithGG', [AuthController::class, 'loginWithGG']);
+Route::post('/login/google', [AuthController::class, 'loginWithGG']);
 
-Route::post('/registerWithGG/{type}', [AuthController::class, 'registerWithGG']);
+Route::post('/register/google/{type}', [AuthController::class, 'registerWithGG']);
 
 Route::get('/postItem', [PostController::class, 'getAllPosts']);
-Route::get('/postItem/{id}', [PostController::class, 'getPost']);
+
+Route::get('/postItem/{id}', [PostController::class, 'getPostByID']);
 
 // test post 
-Route::put('/postUpdate/{id}', [PostController::class, 'update']);
+Route::put('/postItem/{id}', [PostController::class, 'update']);
 
-Route::delete('/postDelete/{id}', [PostController::class, 'delete']);
+Route::delete('/postItem/{id}', [PostController::class, 'delete']);
 
 Route::get('/blog', [BlogController::class, 'getAllBlogs']);
 
 Route::get('/blog/{id}', [BlogController::class, 'getById']);
 
-Route::get('/new-blogs', [BlogController::class, 'getNewBlogs']);
+Route::get('/blog/new', [BlogController::class, 'getNewBlogs']);
 
 Route::get('/employer', [EmployeeController::class, 'getAllEmployers']);
-
-
 
 Route::middleware('auth.jwt')->group(function () {
     Route::post('/review', [EmployeeController::class, 'addReview']);
 
     Route::get('/user', [AuthController::class, 'user']);
 
-    Route::post('/addBlog', [BlogController::class, 'addBlog']);
+    Route::post('/blog', [BlogController::class, 'addBlog']);
 
-    Route::post('/postJob', [PostController::class, 'postJob']);
-    Route::get('/my-posts/{id}', [PostController::class, 'getMyPosts']);
+    Route::post('/postItem', [PostController::class, 'postJob']);
+    
+    Route::get('/postItem/myPost/{id}', [PostController::class, 'getMyPosts']);
 
     Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
 
     Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
 
     Route::prefix('admin')->group(function () {
-        Route::get('/employees', [EmployeeController::class, 'employees']);
-        Route::get('/employers', [EmployerController::class, 'employers']);
+        Route::get('/employees', [AdminController::class, 'employees']);
+        Route::get('/employers', [AdminController::class, 'employers']);
     });
-
+    
 
 });
