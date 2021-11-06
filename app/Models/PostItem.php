@@ -73,7 +73,7 @@ class PostItem extends Model
     public static function getAllPosts(){
         $projections=['id','companyId', 'title','nameJob','salary',
          'description', 'category', 'duration', 'address','imagesAddress',
-        'applies', 'rate', 'like', 'comment'];
+        'applies', 'rate', 'like', 'comment', 'created_at'];
         $allPost= PostItem::all($projections);
         $allPostsWithUser = array();
         foreach($allPost as $post){
