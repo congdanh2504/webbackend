@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function employees(){
-        return User::where('type', '=','Employee')->Paginate(15);
+        return User::where('type', '=','Employee')->Paginate(10);
     }
 
     public function employers(){
-        return User::where('type', '=','Employer')->Paginate(15);
+        return User::where('type', '=','Employer')->Paginate(10);
+    }
+
+    public function deleteUser($id){
+
+        $user= User::find($id);
+        $user->getAllUserBlogs()->delete();
+        $user->delete();
+        return User::where('type', '=','Employee')->Paginate(10);
     }
 }

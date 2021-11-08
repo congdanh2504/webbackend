@@ -68,6 +68,7 @@ Route::middleware('auth.jwt')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/employees', [AdminController::class, 'employees']);
             Route::get('/employers', [AdminController::class, 'employers']);
+            Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
         });
     });
 
