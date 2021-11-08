@@ -17,5 +17,5 @@ class EmployerController extends Controller
     public function employerUpdateProfile(Request $request){
       return Employer::updateProfile($request);
     }
-    
+
 }
