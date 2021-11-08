@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployerController extends Controller
 {
-  public function employerUpdateProfile(Request $request){
-    return Employer::updateProfile($request);
-  }
+    public function employers() {
+      return User::where('type', '=', 'Employer')->orderBy('rate.avg', 'desc')->Paginate(10);
+    }
+
+    public function employerUpdateProfile(Request $request){
+      return Employer::updateProfile($request);
+    }
     
 }
