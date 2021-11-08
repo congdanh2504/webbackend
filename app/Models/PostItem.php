@@ -114,4 +114,20 @@ class PostItem extends Model
         PostItem::find($id)->delete();
         return PostItem::all();
     }
+
+    public static function searchJob($request){
+        $location = $request->input('location');
+        $keyword = $request->input('keyword');
+        $posts = PostItem::where('address.detail', 'LIKE', "%".$location."%")
+                        ->orWhere('nameJob', 'LIKE', "%$keyword%")
+                        ->orWhere('category', 'LIKE', "%$keyword%")->get();
+        $allPostsWithUser = array();
+        foreach($posts as $post){
+            $post->user;
+            array_push($allPostsWithUser,$post);
+        }
+        $allPostsWithUser = array_reverse($allPostsWithUser, true);
+        $data = PaginationController::paginate($allPostsWithUser, 4);
+        return $data;
+    }
 }

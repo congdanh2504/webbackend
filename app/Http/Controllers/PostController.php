@@ -31,4 +31,8 @@ class PostController extends Controller
     protected function delete($id){
         return PostItem::deleteJob($id);
     }
+
+    protected function search(Request $request){
+        return PostItem::searchJob($request);
+    }
 }

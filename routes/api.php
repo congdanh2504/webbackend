@@ -49,6 +49,8 @@ Route::get('/blog/new/{limit}', [BlogController::class, 'getNewBlogs']);
 
 Route::get('/employer', [EmployerController::class, 'employers']);
 
+Route::post('/postItem/search', [PostController::class, 'search']);
+
 Route::middleware('auth.jwt')->group(function () {
     Route::post('/review', [EmployeeController::class, 'addReview']);
 
