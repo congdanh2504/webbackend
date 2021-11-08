@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function getAllEmployers() {
-        return User::where('type', '=', 'employer');
+    public function employers() {
+        return User::where('type', '=', 'Employer')->orderBy('rate.avg', 'desc')->Paginate(10);
     }
 
     public function employeeUpdateProfile(Request $request) {

@@ -47,7 +47,7 @@ Route::get('/blog/{id}', [BlogController::class, 'getById']);
 
 Route::get('/blog/new/{limit}', [BlogController::class, 'getNewBlogs']);
 
-Route::get('/employer', [EmployeeController::class, 'getAllEmployers']);
+Route::get('/employer', [EmployeeController::class, 'employers']);
 
 Route::middleware('auth.jwt')->group(function () {
     Route::post('/review', [EmployeeController::class, 'addReview']);
@@ -64,10 +64,11 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
 
-    Route::prefix('admin')->group(function () {
-        Route::get('/employees', [AdminController::class, 'employees']);
-        Route::get('/employers', [AdminController::class, 'employers']);
+    Route::middleware('admin')->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::get('/employees', [AdminController::class, 'employees']);
+            Route::get('/employers', [AdminController::class, 'employers']);
+        });
     });
-    
 
 });

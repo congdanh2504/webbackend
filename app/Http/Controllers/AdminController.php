@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function employees(Request $request){
+    public function employees(){
         return User::where('type', '=','Employee')->Paginate(15);
     }
 
-    public function employers(Request $request){
+    public function employers(){
         return User::where('type', '=','Employer')->Paginate(15);
     }
 }
