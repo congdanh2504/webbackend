@@ -51,6 +51,8 @@ Route::get('/employer', [EmployerController::class, 'employers']);
 
 Route::post('/postItem/search', [PostController::class, 'search']);
 
+Route::get('/postItem/myPost/{id}', [PostController::class, 'getMyPosts']);
+
 Route::middleware('auth.jwt')->group(function () {
     Route::post('/review', [EmployeeController::class, 'addReview']);
 
@@ -58,9 +60,7 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::post('/blog', [BlogController::class, 'addBlog']);
 
-    Route::post('/postItem', [PostController::class, 'postJob']);
-    
-    Route::get('/postItem/myPost/{id}', [PostController::class, 'getMyPosts']);
+    Route::post('/postItem', [PostController::class, 'postJob']);  
 
     Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);
 
@@ -71,6 +71,8 @@ Route::middleware('auth.jwt')->group(function () {
             Route::get('/employees', [AdminController::class, 'employees']);
             Route::get('/employers', [AdminController::class, 'employers']);
             Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
+            Route::delete('/blog/{id}', [AdminController::class, 'deleteBlog']);
+            Route::delete('/postItem/{id}', [AdminController::class, 'deletePostItem']);
         });
     });
 
