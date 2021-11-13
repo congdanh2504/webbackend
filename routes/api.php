@@ -60,6 +60,8 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::post('/blog', [BlogController::class, 'addBlog']);
 
+    Route::delete('/postItem/{id}', [AdminController::class, 'deletePostItem']);
+
     Route::post('/postItem', [PostController::class, 'postJob']);  
 
     Route::post('/employeeUpdateProfile', [EmployeeController::class, 'employeeUpdateProfile']);

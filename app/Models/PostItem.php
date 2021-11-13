@@ -101,7 +101,6 @@ class PostItem extends Model
         $myPostUser = array_reverse($myPostUser, true);
         $data= PaginationController::Paginate($myPostUser, 4);
         return $data;
-        return $myPostUser;
     }
 
     public static function updateJob(Request $request, $id){
