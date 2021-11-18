@@ -35,4 +35,8 @@ class PostController extends Controller
     protected function search(Request $request){
         return PostItem::searchJob($request);
     }
+
+    protected function updateJob(Request $request){
+        return PostItem::updateJob($request);
+    }
 }

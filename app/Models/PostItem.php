@@ -103,7 +103,8 @@ class PostItem extends Model
         return $data;
     }
 
-    public static function updateJob(Request $request, $id){
+    public static function updateJob(Request $request){
+        $id = $request->input('id');
         $post= PostItem::find($id);
         $post->update($request->all());
         return $post;

@@ -68,6 +68,8 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::post('/employerUpdateProfile', [EmployerController::class, 'employerUpdateProfile']);
 
+    Route::patch('/postItem', [PostController::class, 'updateJob']);  
+
     Route::middleware('admin')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/employees', [AdminController::class, 'employees']);
