@@ -35,4 +35,41 @@ class AdminController extends Controller
         $postItem->delete();
         return PostItem::getAllPosts();
     }
+
+    public function report() {
+        $countByMonth = ['m01' => 0, 'm02' => 0, 'm03' => 0,'m04' => 0,'m05' => 0,'m06' => 0,'m07' => 0,'m08' => 0,'m09' => 0,'m10' => 0,'m11' => 0,'m12' => 0];
+        $postItems = PostItem::all();
+        foreach ($postItems as $postItem) {
+            $date = $postItem['created_at'];
+            $year = substr($date, 0, 4);
+            if (date("Y") == $year) {
+                $month = substr($date, 5, 2);
+                $countByMonth["m$month"] += 1;
+            }
+        }
+        $numOfEmployees = User::where('type', "Employee")->get()->count();
+        $numOfEmployers = User::where('type', "Employer")->get()->count();
+        $numOfBlogs = Blog::all()->count();
+        $numOfJobs = PostItem::all()->count();
+        $numOfReceptionist = PostItem::where("category", 'Receptionist')->get()->count();
+        $numOfWebDeveloper = PostItem::where("category", 'Web developer')->get()->count();
+        $numOfDesigner = PostItem::where("category", 'Designer')->get()->count();
+        $numOfEditor = PostItem::where("category", 'Editor')->get()->count();
+        $numOfProgrammer = PostItem::where("category", 'Programmer')->get()->count();
+        return response()->json([
+            'status' => true,
+            'report' => [
+                'numOfEmployees' => $numOfEmployees,
+                'numOfEmployers' => $numOfEmployers,
+                'numOfBlogs' => $numOfBlogs,
+                'numOfJobs' => $numOfJobs,
+                'numOfReceptionist' => $numOfReceptionist,
+                'numOfWebDeveloper' => $numOfWebDeveloper,
+                'numOfDesigner' => $numOfDesigner,
+                'numOfEditor' => $numOfEditor,
+                'numOfProgrammer' => $numOfProgrammer,
+                'countByMonth' => $countByMonth
+            ]
+        ]);
+    }
 }

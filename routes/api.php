@@ -77,6 +77,7 @@ Route::middleware('auth.jwt')->group(function () {
             Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
             Route::delete('/blog/{id}', [AdminController::class, 'deleteBlog']);
             Route::delete('/postItem/{id}', [AdminController::class, 'deletePostItem']);
+            Route::get('/report', [AdminController::class, 'report']);
         });
     });
 
