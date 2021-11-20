@@ -70,6 +70,8 @@ Route::middleware('auth.jwt')->group(function () {
 
     Route::patch('/postItem', [PostController::class, 'updateJob']);  
 
+    Route::post('/apply',  [PostController::class, 'addApply']);
+
     Route::middleware('admin')->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/employees', [AdminController::class, 'employees']);

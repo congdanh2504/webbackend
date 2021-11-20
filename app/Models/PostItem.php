@@ -63,10 +63,7 @@ class PostItem extends Model
                 'province' => $province,
                 'detail' =>$detailedAddress,
             ],
-            'applies' => 0,
-            'rate'=>0,
-            'like' => 0,
-            'comment' => 0,
+            'applies' => []
         ]);
     }
 
@@ -129,5 +126,21 @@ class PostItem extends Model
         $allPostsWithUser = array_reverse($allPostsWithUser, true);
         $data = PaginationController::paginate($allPostsWithUser, 4);
         return $data;
+    }
+
+    public static function addApply($request) {
+        $postItemID = $request->input('postItemID');
+        $employeeID = $request->input('employeeID');
+        $postItem = PostItem::find($postItemID);
+        $employee = User::find($employeeID);
+        $postItem->push('applies', [
+            '_id' => $employee['id'],
+            'name' => $employee['name'],
+            'avatarAddress' => $employee['avatarAddress']
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully',
+        ], 200);
     }
 }

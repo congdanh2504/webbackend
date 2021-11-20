@@ -39,4 +39,8 @@ class PostController extends Controller
     protected function updateJob(Request $request){
         return PostItem::updateJob($request);
     }
+
+    public function addApply(Request $request) {
+        return PostItem::addApply($request);
+    }
 }
