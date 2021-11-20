@@ -78,6 +78,10 @@ Route::middleware('auth.jwt')->group(function () {
             Route::delete('/blog/{id}', [AdminController::class, 'deleteBlog']);
             Route::delete('/postItem/{id}', [AdminController::class, 'deletePostItem']);
             Route::get('/report', [AdminController::class, 'report']);
+            Route::get('/find-user', [AdminController::class, 'findUser']);
+            Route::get('/find-company', [AdminController::class, 'findCompany']);
+            Route::get('/find-post', [AdminController::class, 'findPost']);
+            Route::get('/find-blog', [AdminController::class, 'findBlog']);
         });
     });
 
