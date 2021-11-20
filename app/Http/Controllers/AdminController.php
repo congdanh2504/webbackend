@@ -72,4 +72,52 @@ class AdminController extends Controller
             ]
         ]);
     }
+
+    public function findUser(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword === null){
+            return User::where('type', 'Employee')->Paginate(10);
+        }
+        return User::where('name', 'like',  "%$keyword%")
+                    ->where('type', 'Employee')->Paginate(10);
+    }
+
+    public function findCompany(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword === null){
+            return User::where('type', 'Employer')->Paginate(10);
+        }
+        return User::where('name', 'like',  "%$keyword%")
+                    ->where('type', 'Employer')->Paginate(10);
+    }
+
+    public function findPost(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword === null){
+            return PostItem::getAllPosts();
+        }
+        $posts= PostItem::where('title', 'like',  "%$keyword%")
+                    ->orWhere('nameJob', 'like',  "%$keyword%")->get();
+        $postsWithUser = array();
+        foreach($posts as $post) {
+            $post->user;
+            array_push($postsWithUser, $post);
+        }
+        return  PaginationController::paginate($postsWithUser, 10);
+    }
+
+    public function findBlog(Request $request){
+        $keyword = $request->input('keyword');
+        if($keyword === null){
+            return Blog::getAllBlogs();
+        }
+        $blogs =Blog::where('title', 'like',  "%$keyword%")->get();
+        $blogsWithUser = array();
+        foreach($blogs as $blog) {
+            $blog->user;
+            array_push($blogsWithUser, $blog);
+        }
+        return  PaginationController::paginate($blogsWithUser, 10);
+    }
+
 }
