@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Str;
 
 class User extends Model implements AuthenticatableContract, JWTSubject
 {
@@ -177,6 +179,68 @@ class User extends Model implements AuthenticatableContract, JWTSubject
                 ]
             ]);
         } 
+    }
+
+    public static function changePassword($request) {
+        $email = $request->input("email");
+        $id = $request->input("id");
+        $oldPassword = $request->input("oldPassword");
+        $newPassword = $request->input("newPassword");
+        $user = User::find($id);
+        if (strlen($newPassword) < 8) return response(['message' => 'Successfully'], Response::HTTP_BAD_REQUEST);
+        if (FacadesJWTAuth::attempt(['email' => $email,'password' => $oldPassword])) {
+            $user->password = Hash::make($newPassword);
+            $user->save();
+            return response(['message' => 'Successfully'], Response::HTTP_OK);
+        } else {
+            return response(['message' => 'Error'], Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public static function generateUUID($length) {
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+          $random .= rand(0, 1) ? rand(0, 9) : chr(rand(ord('a'), ord('z')));
+        }
+        return $random;
+    }
+
+    public static function resetPassword($request) {
+        require base_path("vendor/autoload.php");
+        $email = $request->input("email");
+        $user = User::where("email", $email)->first();
+        if (!$user) {
+            return response(['message' => 'Not found'], Response::HTTP_NOT_FOUND);
+        }
+        
+        $mail = new PHPMailer(true);  
+        $newPass = User::generateUUID(10);
+        try {
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';         
+            $mail->SMTPAuth = true;
+            $mail->Username = 'jobhub2504@gmail.com'; 
+            $mail->Password = '01254995675';   
+            $mail->SMTPSecure = 'tls';               
+            $mail->Port = 587;    
+            $mail->setFrom('jobhub2504@gmail.com', 'JobHub');
+            $mail->addAddress($email);
+            $mail->isHTML(true);                            
+            $mail->Subject = 'Reset password';
+            $mail->Body    = 'Your new password: '.$newPass;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            if(!$mail->send() ) {
+                return response(['message' => 'Error'], Response::HTTP_BAD_REQUEST);
+            }      
+            else {
+                $user->password = Hash::make($newPass);
+                $user->save();
+                return response(['message' => 'Successfully'], Response::HTTP_OK);
+            }
+        } catch (Exception $e) {
+            return response(['message' => 'Error'], Response::HTTP_BAD_REQUEST);
+        }
     }
 
 }

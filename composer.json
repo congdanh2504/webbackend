@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "nao-pon/flysystem-google-drive": "^1.1",
+        "phpmailer/phpmailer": "^6.5",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

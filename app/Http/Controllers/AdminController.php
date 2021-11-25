@@ -33,7 +33,6 @@ class AdminController extends Controller
     public function deletePostItem($id) {
         $postItem = PostItem::find($id);
         $postItem->delete();
-        return PostItem::getAllPosts();
     }
 
     public function report() {

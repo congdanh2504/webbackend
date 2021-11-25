@@ -26,7 +26,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/user/{id}', [AuthController::class, 'userById']);
 
-// Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/user/resetPassword', [AuthController::class, 'resetPassword']);
 
 Route::post('/login/google', [AuthController::class, 'loginWithGG']);
 
@@ -71,6 +71,8 @@ Route::middleware('auth.jwt')->group(function () {
     Route::patch('/postItem', [PostController::class, 'updateJob']);  
 
     Route::post('/apply',  [PostController::class, 'addApply']);
+
+    Route::patch('/user/password', [AuthController::class, 'changePassword']);
 
     Route::middleware('admin')->group(function () {
         Route::prefix('admin')->group(function () {

@@ -35,4 +35,12 @@ class AuthController extends Controller
     public function registerWithGG(Request $request, $type) {
         return User::registerWithGG($request, $type);
     }
+
+    public function changePassword(Request $request) {
+        return User::changePassword($request);
+    }
+
+    public function resetPassword(Request $request) {
+        return User::resetPassword($request);
+    }
 }
