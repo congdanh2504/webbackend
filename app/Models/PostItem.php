@@ -136,11 +136,19 @@ class PostItem extends Model
         $postItem->push('applies', [
             '_id' => $employee['id'],
             'name' => $employee['name'],
-            'avatarAddress' => $employee['avatarAddress']
+            'avatarAddress' => $employee['avatarAddress'],
+            'isApprove' => "null"
         ]);
         return response()->json([
             'status' => true,
             'message' => 'Successfully',
         ], 200);
+    }
+
+    public static function response($request) {
+        $index = $request->input("index");
+        $id = $request->input("id");
+        $isApprove = $request->input("isApprove");
+        PostItem::where("_id", $id)->update(array("applies.".$index.".isApprove" => $isApprove));
     }
 }

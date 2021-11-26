@@ -54,6 +54,8 @@ Route::post('/postItem/search', [PostController::class, 'search']);
 Route::get('/postItem/myPost/{id}', [PostController::class, 'getMyPosts']);
 
 Route::middleware('auth.jwt')->group(function () {
+    Route::post('/apply/response', [PostController::class, 'response']);
+    
     Route::post('/review', [EmployeeController::class, 'addReview']);
 
     Route::get('/user', [AuthController::class, 'user']);

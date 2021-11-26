@@ -43,4 +43,8 @@ class PostController extends Controller
     public function addApply(Request $request) {
         return PostItem::addApply($request);
     }
+  
+    public function response(Request $request) {
+        return PostItem::response($request);
+    }
 }
